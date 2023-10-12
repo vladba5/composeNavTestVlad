@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "composeNavTestVlad"
 include ':app'
+include ':feature_one'
+include ':feature_two'

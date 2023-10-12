@@ -17,7 +17,7 @@ import com.example.composenavtestvlad.ui.theme.ComposeNavTestVladTheme
 
 class MainActivity : ComponentActivity() {
 
-    companion object{
+    companion object {
         const val NAME_ARGS = "NAME_ARGS"
     }
 
@@ -25,53 +25,29 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeNavTestVladTheme {
-                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    Greeting("Android")
-//                }
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
                     startDestination = "screen1"
                 ) {
-                    composable("screen1"){ entry ->
-                        ScreenOne(){
+                    composable("screen1") { entry ->
+                        ScreenOne() {
                             val text = entry.savedStateHandle.get<String>(NAME_ARGS)
                             //add text as args
                             Log.d("ptt", text.toString())
                             navController.navigate("screen2")
                         }
                     }
-                    composable("screen2"){
-                        ScreenTwo(){
+                    composable("screen2") {
+                        ScreenTwo() {
                             navController.previousBackStackEntry
                                 ?.savedStateHandle
                                 ?.set(NAME_ARGS, "vlad")
                             navController.popBackStack("screen1", false)
-
                         }
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeNavTestVladTheme {
-        Greeting("Android")
     }
 }
